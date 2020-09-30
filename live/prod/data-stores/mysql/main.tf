@@ -23,7 +23,7 @@ terraform {
 }
 
 resource "aws_db_instance" "example" {
-  identifier_prefix   = "terraform-up-and-running"
+  identifier_prefix   = "cleo-terraform"
   engine              = "mysql"
   allocated_storage   = 10
   instance_class      = "db.t2.micro"
