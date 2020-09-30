@@ -39,3 +39,34 @@ resource "aws_autoscaling_schedule" "scale_in_at_night" {
   recurrence             = "0 17 * * *"
   autoscaling_group_name = module.webserver_cluster.asg_name
 }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# REQUIRED PARAMETERS
+# You must provide a value for each of these parameters.
+# ---------------------------------------------------------------------------------------------------------------------
+
+variable "db_remote_state_bucket" {
+  description = "The name of the S3 bucket used for the database's remote state storage"
+  type        = string
+}
+
+variable "db_remote_state_key" {
+  description = "The name of the key in the S3 bucket used for the database's remote state storage"
+  type        = string
+}
+
+# ---------------------------------------------------------------------------------------------------------------------
+# OPTIONAL PARAMETERS
+# These parameters have reasonable defaults.
+# ---------------------------------------------------------------------------------------------------------------------
+
+variable "cluster_name" {
+  description = "The name to use to namespace all the resources in the cluster"
+  type        = string
+  default     = "webservers-prod"
+}
+
+output "alb_dns_name" {
+  value       = module.webserver_cluster.alb_dns_name
+  description = "The domain name of the load balancer"
+}
